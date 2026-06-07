@@ -30,7 +30,7 @@ const Register = () => {
   };
 
   return (
-    <div className="container-fluid vh-100 p-0">
+    <div className="container-fluid vh-100 p-0 auth-container">
       <div className="row g-0 h-100">
         
         {/* Left Side: Design/Image */}
@@ -51,8 +51,8 @@ const Register = () => {
         </div>
 
         {/* Right Side: Input Form */}
-        <div className="col-md-6 col-lg-5 d-flex align-items-center justify-content-center bg-white shadow-lg">
-          <div className="w-100 p-4 p-md-5" style={{ maxWidth: '450px' }}>
+        <div className="col-md-6 col-lg-5 d-flex align-items-center justify-content-center bg-white shadow-lg auth-card-parent">
+          <div className="w-100 p-4 p-md-5 auth-form-wrapper" style={{ maxWidth: '450px' }}>
             <div className="text-center mb-4">
               <h2 className="fw-bold text-dark">Create Account</h2>
               <p className="text-muted small">Join the Quiz Portal today</p>
