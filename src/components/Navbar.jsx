@@ -1,12 +1,22 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleNavbar = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const closeNavbar = () => {
+    setIsOpen(false);
+  };
 
   const handleLogout = () => {
+    closeNavbar();
     logout();
     navigate('/login');
   };
@@ -22,7 +32,7 @@ const Navbar = () => {
     >
       <div className="container">
         {/* Brand Logo */}
-        <Link className="navbar-brand fw-bold fs-4 d-flex align-items-center" to="/dashboard">
+        <Link className="navbar-brand fw-bold fs-4 d-flex align-items-center" to="/dashboard" onClick={closeNavbar}>
           <span className="me-2" style={{ fontSize: '1.5rem' }}>🎓</span>
           <span className="bg-gradient-to-r from-info to-primary">QuizPortal</span>
         </Link>
@@ -31,17 +41,18 @@ const Navbar = () => {
         <button
           className="navbar-toggler border-0"
           type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
+          onClick={toggleNavbar}
+          aria-expanded={isOpen}
+          aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon"></span>
         </button>
 
         {/* Links Section */}
-        <div className="collapse navbar-collapse" id="navbarNav">
+        <div className={`collapse navbar-collapse ${isOpen ? 'show' : ''}`} id="navbarNav">
           <ul className="navbar-nav mx-auto">
             <li className="nav-item mx-2">
-              <Link className="nav-link px-3 rounded-pill transition-all hover-bg-light" to="/quizzes">
+              <Link className="nav-link px-3 rounded-pill transition-all hover-bg-light" to="/quizzes" onClick={closeNavbar}>
                 Browse Quizzes
               </Link>
             </li>
@@ -51,13 +62,14 @@ const Navbar = () => {
                 className="nav-link px-3 rounded-pill fw-semibold text-info"
                 to="/ai-generator"
                 style={{ border: '1px solid rgba(13, 202, 240, 0.3)' }}
+                onClick={closeNavbar}
               >
                 🤖 AI Generator
               </Link>
             </li>
 
             <li className="nav-item mx-2">
-              <Link className="nav-link px-3 rounded-pill transition-all" to="/my-results">
+              <Link className="nav-link px-3 rounded-pill transition-all" to="/my-results" onClick={closeNavbar}>
                 My History
               </Link>
             </li>
