@@ -29,7 +29,8 @@ const AIQuizGenerator = () => {
       }
     } catch (err) {
       console.error(err);
-      alert("AI limit reached or network error. Try again in 30 seconds.");
+      const serverMessage = err.response?.data?.message || err.response?.data?.error;
+      alert(serverMessage || "AI generation error. Please verify your connection or try again.");
     } finally {
       setLoading(false);
     }
